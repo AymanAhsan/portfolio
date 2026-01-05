@@ -27,9 +27,17 @@ export default function Home() {
         </h1>
         <TypingEffect words={["SOFTWARE ENGINEER", "FULLSTACK DEVELOPER", "STARTUP FOUNDER"] as const} />
         
-        <div className="mt-16 animate-bounce rounded-full p-2 border-4 border-solid border-gray-300">
-          <ChevronDown size={32} style={{ color: '#ff4f5f' }} />
+        <div 
+          className="mt-8 text-lg font-medium transition-all duration-500"
+          style={{
+            opacity: Math.min(1, scrollY / 200),
+            transform: `translateY(${Math.max(0, 20 - scrollY / 10)}px)`,
+            color: '#ff4f5f'
+          }}
+        >
+          Powered by Next.JS
         </div>
+        
       </main>
 
       <section 
