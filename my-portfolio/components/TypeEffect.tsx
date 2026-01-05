@@ -41,7 +41,7 @@ export default function TypingEffect({ words }: { words: readonly string[] }) {
   }, [displayText, isDeleting, titleIndex]);
   
   return (
-    <h3 className={`text-4xl mt-6 font-bold ${electrolize.className}`} style={{ color: '#ff4f5f' }}>
+    <h3 className={`text-2xl md:text-4xl mt-6 font-bold text-center ${electrolize.className}`} style={{ color: '#ff4f5f' }}>
       <span>
         {displayText}
         <span className="animate-pulse">|</span>
