@@ -2,7 +2,7 @@
 
 import TypingEffect from "@/components/TypeEffect";
 import { useEffect, useState } from "react";
-import { ChevronDown, Layers, GraduationCap  } from "lucide-react";
+import { ChevronDown, Layers, GraduationCap, Rocket } from "lucide-react";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -25,7 +25,7 @@ export default function Home() {
         <h1 className="text-4xl md:text-5xl font-extrabold mt-4 text-center">
           Ayman Ahsan
         </h1>
-        <TypingEffect words={["SOFTWARE ENGINEER", "FULLSTACK DEVELOPER", "STARTUP FOUNDER"] as const} />
+        <TypingEffect words={["SOFTWARE ENGINEER", "FULL-STACK DEVELOPER", "STARTUP FOUNDER"] as const} />
         
         <div 
           className="mt-8 text-base md:text-lg font-medium transition-all duration-500"
@@ -57,7 +57,7 @@ export default function Home() {
               <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
                 <Layers size={80} md-size={120} strokeWidth={2} color="#ff4f5f" className="flex-shrink-0" />
                 <h3 className="text-3xl md:text-6xl font-extrabold leading-tight" style={{ color: '#d9d9d9' }}>
-                  Full-Stack Development
+                  Full-Stack Developer
                 </h3>
               </div>
 
@@ -109,6 +109,20 @@ export default function Home() {
                   <span className="text-2xl font-semibold" style={{ color: '#e5e5e5' }}>Focus: algorithms, data structures, software engineering</span>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="flex justify-center mt-32 pt-24 border-t border-[rgba(255,255,255,0.08)]">
+            <div className="flex flex-col items-center gap-6 max-w-3xl">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
+                <Rocket size={120} md-size={140} strokeWidth={2} color="#ff4f5f" className="flex-shrink-0" />
+                <h3 className="text-5xl md:text-7xl font-extrabold text-center md:text-left" style={{ color: '#d9d9d9' }}>
+                  Startup Founder
+                </h3>
+              </div>
+
+              <p className="text-base md:text-xl leading-relaxed text-center" style={{ color: '#c7c7c7' }}>
+               Lead Founder of Network Intelligence Applied (NIA)
+              </p>
             </div>
           </div>
         </div>
