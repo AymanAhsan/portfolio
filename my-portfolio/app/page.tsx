@@ -102,11 +102,11 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-4 border-b border-[rgba(255,255,255,0.08)] pb-4">
                   <span className="text-lg" style={{ color: '#ff4f5f' }}>02</span>
-                  <span className="text-2xl font-semibold" style={{ color: '#e5e5e5' }}>B.S. in Computer Science (Sophomore)</span>
+                  <span className="text-2xl font-semibold" style={{ color: '#e5e5e5' }}>B.S. in Computer Science (Junior)</span>
                 </div>
                 <div className="flex items-center gap-4 border-b border-[rgba(255,255,255,0.08)] pb-4">
                   <span className="text-lg" style={{ color: '#ff4f5f' }}>03</span>
-                  <span className="text-2xl font-semibold" style={{ color: '#e5e5e5' }}>Focus: algorithms, data structures, software engineering</span>
+                  <span className="text-2xl font-semibold" style={{ color: '#e5e5e5' }}>Focus: Algorithms, Data Structures, Software Engineering</span>
                 </div>
               </div>
             </div>
