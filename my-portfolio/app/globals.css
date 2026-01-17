@@ -12,7 +12,7 @@
   --outline: #e63946;
   --shadow: 0 22px 50px rgba(0, 0, 0, 0.35);
   --radius: 14px;
-  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-inter), "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 
 @theme inline {
@@ -301,4 +301,128 @@ main {
 .outline-accent {
   border: 1px solid var(--outline);
   box-shadow: 0 0 0 1px rgba(230, 57, 70, 0.25), var(--shadow);
+}
+
+/* Glassmorphism & 3D Effects */
+.glass-hero {
+  background: linear-gradient(130deg, rgba(20, 21, 28, 0.7), rgba(12, 13, 18, 0.6)) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1),
+    0 0 60px rgba(230, 57, 70, 0.15) !important;
+}
+
+.glass-pill {
+  background: rgba(230, 57, 70, 0.15) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 79, 95, 0.4) !important;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15),
+    0 0 20px rgba(255, 79, 95, 0.2) !important;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.glass-pill:hover {
+  transform: translateY(-2px) translateZ(8px);
+  box-shadow: 
+    0 12px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2),
+    0 0 30px rgba(255, 79, 95, 0.3);
+  background: rgba(230, 57, 70, 0.22);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #ff4f5f 50%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(20, 21, 28, 0.6), rgba(12, 13, 18, 0.5)) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.08),
+    0 0 40px rgba(158, 160, 170, 0.1) !important;
+  transform-style: preserve-3d;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 79, 95, 0.4) !important;
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.45),
+    inset 0 1px 3px rgba(255, 255, 255, 0.12),
+    0 0 60px rgba(255, 79, 95, 0.2) !important;
+}
+
+.glass-card-strong {
+  background: linear-gradient(135deg, rgba(20, 21, 28, 0.8), rgba(12, 13, 18, 0.7)) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 3px rgba(255, 255, 255, 0.1),
+    0 0 50px rgba(255, 79, 95, 0.12) !important;
+}
+
+.glass-slider {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Scroll Animation Optimizations */
+.scroll-fade {
+  contain: layout style paint;
+  will-change: opacity, transform;
+}
+
+.scroll-section {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+/* Performance optimizations for smoother animations */
+@media (prefers-reduced-motion: no-preference) {
+  .glass-card,
+  .glass-pill,
+  .card,
+  .button {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .scroll-fade,
+  .scroll-section {
+    will-change: auto;
+  }
 }

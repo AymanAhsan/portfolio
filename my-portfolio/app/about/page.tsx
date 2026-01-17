@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Cloud, Smartphone } from "lucide-react";
+import "./about.css";
 
 const experiences = [
   {
@@ -43,11 +44,32 @@ const techLogos = [
 
 export default function AboutPage() {
   const [position, setPosition] = useState(20);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const currentExperience = useMemo(
     () => (position < 50 ? experiences[0] : experiences[1]),
     [position]
   );
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>, cardIndex: number) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    setMousePos({ x, y });
+    setHoveredCard(cardIndex);
+  };
+
+  const handleCardMouseLeave = () => {
+    setHoveredCard(null);
+  };
+
+  const getCardTransform = (cardIndex: number) => {
+    if (hoveredCard !== cardIndex) return 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    const tiltX = (mousePos.y - 0.5) * -10;
+    const tiltY = (mousePos.x - 0.5) * 10;
+    return `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(10px)`;
+  };
 
   const sliderBackground = useMemo(
     () => "linear-gradient(90deg, #ff8a00 0%, #ff4f5f 50%, #7c3aed 100%)",
@@ -57,10 +79,10 @@ export default function AboutPage() {
   return (
     <main className="page-shell">
       <div className="max-width stack">
-        <section className="hero">
+        <section className="hero glass-hero">
           <div>
-            <p className="pill">About</p>
-            <h1>About Me</h1>
+            <p className="pill glass-pill">About</p>
+            <h1 className="gradient-text">About Me</h1>
             <p>
               I build scalable full-stack apps with a focus on performance, accessibility, and clean design.
               I excel at React and Node.js, and I love collaborating on innovative projects that make a difference.
@@ -72,15 +94,39 @@ export default function AboutPage() {
         <section className="section">
           <h2>Expertise</h2>
           <div className="grid">
-            <div className="card">
+            <div 
+              className="card glass-card"
+              onMouseMove={(e) => handleCardMouseMove(e, 0)}
+              onMouseLeave={handleCardMouseLeave}
+              style={{
+                transform: getCardTransform(0),
+                transition: hoveredCard === 0 ? 'none' : 'transform 0.3s ease',
+              }}
+            >
               <h3>Frontend</h3>
               <p>React, Next.js, TypeScript, design systems, animations.</p>
             </div>
-            <div className="card">
+            <div 
+              className="card glass-card"
+              onMouseMove={(e) => handleCardMouseMove(e, 1)}
+              onMouseLeave={handleCardMouseLeave}
+              style={{
+                transform: getCardTransform(1),
+                transition: hoveredCard === 1 ? 'none' : 'transform 0.3s ease',
+              }}
+            >
               <h3>Backend</h3>
               <p>Node.js, APIs, auth, data modeling, performance.</p>
             </div>
-            <div className="card">
+            <div 
+              className="card glass-card"
+              onMouseMove={(e) => handleCardMouseMove(e, 2)}
+              onMouseLeave={handleCardMouseLeave}
+              style={{
+                transform: getCardTransform(2),
+                transition: hoveredCard === 2 ? 'none' : 'transform 0.3s ease',
+              }}
+            >
               <h3>Collaboration</h3>
               <p>Product thinking, UX pairing, rapid prototyping, delivery.</p>
             </div>
@@ -96,27 +142,32 @@ export default function AboutPage() {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", width: "100%" }}>
-            <input
-              type="range"
-              min={0}
-              max={100}
-              value={position}
-              onChange={(e) => setPosition(Number(e.target.value))}
-              className="experience-slider"
-              style={{
-                width: "100%",
-                appearance: "none",
-                height: "12px",
-                borderRadius: "999px",
-                background: sliderBackground,
-                backgroundSize: `${Math.max(position, 2)}% 100%`,
-                backgroundRepeat: "no-repeat",
-                backgroundColor: "rgba(255,255,255,0.12)",
-                outline: "none",
-                transition: "box-shadow 200ms ease",
-              }}
-              aria-label="Experience timeline"
-            />
+            <div className="slider-container">
+              <input
+                type="range"
+                min={0}
+                max={100}
+                value={position}
+                onChange={(e) => setPosition(Number(e.target.value))}
+                className="experience-slider glass-slider"
+                style={{
+                  width: "100%",
+                  appearance: "none",
+                  height: "14px",
+                  borderRadius: "999px",
+                  background: sliderBackground,
+                  backgroundSize: `${Math.max(position, 2)}% 100%`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundColor: "rgba(255,255,255,0.08)",
+                  outline: "none",
+                  transition: "box-shadow 200ms ease",
+                  backdropFilter: "blur(10px)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.1)",
+                }}
+                aria-label="Experience timeline"
+              />
+            </div>
             <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.85rem", color: "var(--muted, rgba(255,255,255,0.65))" }}>
               <span>Earlier</span>
               <span>Now</span>
@@ -124,13 +175,13 @@ export default function AboutPage() {
           </div>
 
           <div
-            className="card"
+            className="card glass-card-strong"
             style={{
               display: "flex",
               flexDirection: "column",
               gap: "0.75rem",
-              transition: "transform 200ms ease, opacity 200ms ease",
-              transform: `translateY(${position < 50 ? 4 : -4}px)`,
+              transition: "transform 300ms ease, opacity 300ms ease, box-shadow 300ms ease",
+              transform: `translateY(${position < 50 ? 4 : -4}px) translateZ(0)`,
               opacity: 1,
             }}
           >
@@ -154,7 +205,7 @@ export default function AboutPage() {
                 {techLogos.map((logo) => (
                   <span
                     key={logo.name}
-                    className="pill"
+                    className="pill tech-pill"
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
@@ -163,6 +214,8 @@ export default function AboutPage() {
                       background: "rgba(255,79,95,0.12)",
                       border: "1px solid rgba(255,79,95,0.35)",
                       color: "#f7f7f7",
+                      backdropFilter: "blur(8px)",
+                      transition: "all 0.2s ease",
                     }}
                   >
                     {logo.icon ? (
@@ -182,45 +235,6 @@ export default function AboutPage() {
           </div>
         </section>
       </div>
-
-      <style jsx>{`
-        .experience-slider::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          appearance: none;
-          width: 22px;
-          height: 22px;
-          border-radius: 999px;
-          background: #fff;
-          border: 2px solid #ff4f5f;
-          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-          cursor: pointer;
-          transition: transform 150ms ease, box-shadow 150ms ease;
-        }
-        .experience-slider::-moz-range-thumb {
-          width: 22px;
-          height: 22px;
-          border-radius: 999px;
-          background: #fff;
-          border: 2px solid #ff4f5f;
-          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-          cursor: pointer;
-          transition: transform 150ms ease, box-shadow 150ms ease;
-        }
-        .experience-slider::-webkit-slider-thumb:hover {
-          transform: scale(1.05);
-          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-        }
-        .experience-slider::-moz-range-thumb:hover {
-          transform: scale(1.05);
-          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-        }
-        .experience-slider::-webkit-slider-thumb:active {
-          transform: scale(0.98);
-        }
-        .experience-slider::-moz-range-thumb:active {
-          transform: scale(0.98);
-        }
-      `}</style>
     </main>
   );
 }
