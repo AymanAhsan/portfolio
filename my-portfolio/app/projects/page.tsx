@@ -1,28 +1,44 @@
+import ProjectCard from '@/components/ProjectCard';
+
 const projects = [
-  { title: "Showcase App", desc: "A polished SPA with smooth transitions and API integrations." },
-  { title: "Design System", desc: "Reusable components, tokens, and documentation for a product team." },
-  { title: "Analytics Dashboard", desc: "Data-rich UI with real-time charts and filters." },
+  {
+    title: "Local Event Finder",
+    desc: "A web app that helps users discover local events based on their interests and location.",
+    stack: ["React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL"],
+    image: "/dashboard.png",
+    url: "http://teamstar-production.up.railway.app/",
+  },
+  { title: "AI Summarizer", 
+    desc: "A website that extracts text from PDFs and generates concise summaries using AI.", 
+    stack: ["React", "TypeScript", "Python", "FastAPI", "Gemini"],
+    image: "/Project1.png",
+    url: "https://ai-summarizer.up.railway.app/" },
+  { title: "Coming Soon", desc: "Stay tuned." },
 ];
 
 export default function ProjectsPage() {
   return (
     <main className="page-shell">
       <div className="max-width stack">
-        <section className="hero">
+        <section className="hero-no-card">
           <div>
-            <p className="pill">Projects</p>
-            <h1>Selected Work</h1>
-            <p>Recent builds that balance visual polish with performance and maintainability.</p>
+            <p className="pill">Featured Work</p>
+            <h1>Projects & Case Studies</h1>
+            <p>A showcase of my recent work, from concept to deployment</p>
           </div>
         </section>
 
         <section className="section">
           <div className="grid">
             {projects.map((project) => (
-              <article className="card" key={project.title}>
-                <h3>{project.title}</h3>
-                <p>{project.desc}</p>
-              </article>
+              <ProjectCard
+                key={project.title}
+                title={project.title}
+                desc={project.desc}
+                stack={project.stack}
+                image={project.image}
+                url={project.url}
+              />
             ))}
           </div>
         </section>
