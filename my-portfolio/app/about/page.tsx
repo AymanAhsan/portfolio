@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Cloud, Smartphone } from "lucide-react";
+import { GitHubCalendar } from 'react-github-calendar';
 import "./about.css";
 
 const experiences = [
@@ -130,6 +131,16 @@ export default function AboutPage() {
               <h3>Collaboration</h3>
               <p>Product thinking, UX pairing, rapid prototyping, delivery.</p>
             </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <h2>GitHub Activity</h2>
+          <div className="card glass-card" style={{ padding: "1.5rem", overflow: "auto" }}>
+            <GitHubCalendar 
+              username="AymanAhsan"
+              colorScheme="dark"
+            />
           </div>
         </section>
 
